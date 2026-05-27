@@ -1,3 +1,12 @@
+--[[ 
+	THE SHOWCASE VIDEO IS THIS: https://drive.google.com/file/d/1MhB_feMLIHQgJasPUFExvDuE2cqBHT_a/view?usp=sharing
+	THE SHOWCASE VIDEO IS THIS: https://drive.google.com/file/d/1MhB_feMLIHQgJasPUFExvDuE2cqBHT_a/view?usp=sharing
+	THE SHOWCASE VIDEO IS THIS: https://drive.google.com/file/d/1MhB_feMLIHQgJasPUFExvDuE2cqBHT_a/view?usp=sharing
+	THE SHOWCASE VIDEO IS THIS: https://drive.google.com/file/d/1MhB_feMLIHQgJasPUFExvDuE2cqBHT_a/view?usp=sharing
+	THE SHOWCASE VIDEO IS THIS: https://drive.google.com/file/d/1MhB_feMLIHQgJasPUFExvDuE2cqBHT_a/view?usp=sharing
+	THE SHOWCASE VIDEO IS THIS: https://drive.google.com/file/d/1MhB_feMLIHQgJasPUFExvDuE2cqBHT_a/view?usp=sharing
+]]
+
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerScriptService = game:GetService("ServerScriptService")
 local MarketplaceService = game:GetService("MarketplaceService")
@@ -95,7 +104,7 @@ Remotes.ShopFunction.OnServerInvoke = function(Player: Player, ItemId: string, C
 		if not SkinData then return false, "Skin not found" end
 
 		if not Data.OwnedSkins then Data.OwnedSkins = {} end
-
+		
 		if Data.OwnedSkins[ItemId] then
 			return false, "ALREADY_OWNED"
 		end
@@ -105,6 +114,14 @@ Remotes.ShopFunction.OnServerInvoke = function(Player: Player, ItemId: string, C
 
 			if Data.souls >= Cost then
 				Data.souls -= Cost
+
+				local leaderstats = Player:FindFirstChild("leaderstats")
+				if leaderstats and leaderstats:FindFirstChild("Souls") then
+					leaderstats.Souls.Value = Data.souls
+				end
+
+				Data.OwnedSkins[ItemId] = true
+				
 				return true, "SUCCESS"
 			else
 				return false, "INSUFFICIENT_SOULS"
