@@ -3,24 +3,13 @@
 -- https://drive.google.com/file/d/175LwDjl2vEonw_B88sf0mAtJy5uCSBma/view?usp=sharing
 
 --[[ 
+    INTERNAL SIGNAL MODULE
     Works like a BindableEvent but with better performance and strict typing.
-	Probably gonna make a documentation to explain all methods and how it works later.
     
-    - Server To Server
-    - Client To Client
-    
-    SECURITY WARNINGS:
-    1. METATABLE HOOKING: On the Client define important functions (like Signal.Fire) 
-       as locals at the top of your script to prevent exploiter interception with 
-       metatable hooking.
-    2. SPOOFING: Never trust data fired from a Client side signal for important 
-       logic. Always think an exploiter can see and fire any Signal existing in the
-       client memory using tools or things like getconnections().
-    3. SERVER SECURITY: Server-side is secure from external memory 
-       tampering and does not require local function for security.
-
-	Following these should help against exploiters!
-]]
+    USAGE:
+    - Server <--> Server Communication
+    - Client <--> Client Communication
+--]]
 
 --!strict
 local Signal = {}
