@@ -2,7 +2,7 @@
 -- This module implements a high-performance Linked-List Signal system with Parallel Luau support.
 -- https://drive.google.com/file/d/175LwDjl2vEonw_B88sf0mAtJy5uCSBma/view?usp=sharing
 
---[=[ 
+--[[ 
     Works like a BindableEvent but with better performance and strict typing.
     
     - Server <--> Server Communication
@@ -21,7 +21,7 @@
        tampering and does not require local function for security.
 
 	Following these should help against exploiters!
-]=]
+]]
 
 --!strict
 local Signal = {}
@@ -32,9 +32,9 @@ Connection.__index = Connection
 
 type PackedArgs = { n: number, [number]: any }
 
---[=[ 
+--[[ 
     TYPE DEFINITIONS
-]=]
+]]
 export type Connection = {
 	Connected: boolean,
 	_signal: Signal?,
@@ -70,9 +70,9 @@ export type Signal = {
 	Destroy: (self: Signal) -> (),
 }
 
---[=[ 
+--[[ 
     UTILITIES
-]=]
+]]
 local function packArgs(...): PackedArgs
 	return table.pack(...)
 end
@@ -100,9 +100,9 @@ local function weakSet<T>(): {[T]: true}
 	return (setmetatable({}, { __mode = "k" }) :: any)
 end
 
---[=[ 
+--[[ 
     CONNECTION IMPLEMENTATION
-]=]
+]]
 function Connection.new(signal: Signal, callback: (...any)->(), parallel: boolean?): Connection
 	local self = (setmetatable({
 		Connected = true,
@@ -152,9 +152,9 @@ function Connection:Destroy()
 	(self :: Connection):Disconnect()
 end
 
---[=[ 
+--[[ 
     SIGNAL IMPLEMENTATION
-]=]
+]]
 function Signal.new(name: string?, debugMode: boolean?): Signal
 	local self = (setmetatable({
 		_head = nil,
