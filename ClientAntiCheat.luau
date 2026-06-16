@@ -38,6 +38,11 @@ local WhiteListedGui = {
 	"MainGui",
 	"ShopGui",
 	"InventoryGui",
+	"TopbarCenteredClipped",
+	"TopbarStandardClipped",
+	"TopbarStandard",
+	"TopbarCentered",
+	"HDAdminInterface"
 }
 
 local BlacklistedTerms = {
