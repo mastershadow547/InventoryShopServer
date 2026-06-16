@@ -23,6 +23,7 @@ local GamepassModule = require(ReplicatedStorage.GamepassConfig.Gamepasses)
 local CharacterLookup = {}
 local CategoryLookup = {}
 local SkinLookup = {}
+local RateLimits = {}
 
 for categoryName, categoryList in pairs(CharactersModule) do
 	for _, data in ipairs(categoryList) do
@@ -37,7 +38,6 @@ for categoryName, categoryList in pairs(CharactersModule) do
 	end
 end
 
-local RateLimits = {}
 local function CheckRateLimit(Player: Player, ActionKey: string, Cooldown: number): boolean
 	local key = Player.UserId .. "_" .. ActionKey
 	local lastCall = RateLimits[key] or 0
