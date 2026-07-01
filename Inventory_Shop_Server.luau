@@ -53,6 +53,7 @@ Players.PlayerRemoving:Connect(function(Player: Player)
 	RateLimits[Player.UserId .. "_Inventory"] = nil
 end)
 
+task.spawn(function()
 Remotes.ShopFunction.OnServerInvoke = function(Player: Player, ItemId: string, Currency: string, ItemType: string)
 	ItemType = ItemType or "CHARACTER"
 
@@ -104,7 +105,7 @@ Remotes.ShopFunction.OnServerInvoke = function(Player: Player, ItemId: string, C
 		if not SkinData then return false, "Skin not found" end
 
 		if not Data.OwnedSkins then Data.OwnedSkins = {} end
-		
+
 		if Data.OwnedSkins[ItemId] then
 			return false, "ALREADY_OWNED"
 		end
@@ -121,7 +122,7 @@ Remotes.ShopFunction.OnServerInvoke = function(Player: Player, ItemId: string, C
 				end
 
 				Data.OwnedSkins[ItemId] = true
-				
+
 				return true, "SUCCESS"
 			else
 				return false, "INSUFFICIENT_SOULS"
@@ -131,6 +132,7 @@ Remotes.ShopFunction.OnServerInvoke = function(Player: Player, ItemId: string, C
 
 	return false, "Unknown Error"
 end
+end)
 
 Remotes.PromptGamepass.OnServerEvent:Connect(function(Player: Player, GamepassName: string)
 	if not Player or not GamepassName then return end
@@ -147,6 +149,7 @@ Remotes.PromptGamepass.OnServerEvent:Connect(function(Player: Player, GamepassNa
 	end
 end)
 
+task.spawn(function()
 Remotes.InventoryFunction.OnServerInvoke = function(Player: Player, TargetId: string, Action: string, ExtraId: string)
 	if not Player or not TargetId or not Action then return end
 	if not CheckRateLimit(Player, "Inventory", 0.25) then return "RATE_LIMITED" end
@@ -223,7 +226,9 @@ Remotes.InventoryFunction.OnServerInvoke = function(Player: Player, TargetId: st
 		return "SUCCESS"
 	end
 end
+end)
 
+task.spawn(function()
 MarketplaceService.ProcessReceipt = function(receiptInfo)
 	local player = Players:GetPlayerByUserId(receiptInfo.PlayerId)
 	if not player then
@@ -258,3 +263,4 @@ MarketplaceService.ProcessReceipt = function(receiptInfo)
 	end
 	return Enum.ProductPurchaseDecision.NotProcessedYet
 end
+end)
